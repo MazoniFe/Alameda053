@@ -1,62 +1,103 @@
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-import Nav from 'react-bootstrap/Nav';
+import React, { useState } from 'react';
+import logo from './logo.jpg';
 import './Header.css';
-import logo from './logo.jpg'
-import { useDispatch, useSelector } from 'react-redux';
-import PaginaActionTypes from '../../redux/pagina/action-types';
+import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 
+const Header = () => {
+    const [showOffCanvas, setShowOffCanvas] = useState(false);
 
-function Header() {
-
-    const dispatch = useDispatch();
-    const paginaAtual = useSelector(rootReducer => rootReducer.paginaAtual);
-
-    const trocarPagina = (novaPagina) => {
-        dispatch({
-            type: PaginaActionTypes.NAVEGAR,
-            payload: {novaPagina: novaPagina}
-        });
-    }
+    const toggleOffCanvas = () => {
+        setShowOffCanvas(!showOffCanvas);
+    };
 
     return (
-        <Navbar className='header' bg="light" variant="light">
-            <Container>
-                <Navbar.Brand className="d-flex align-items-center">
-                    <img
-                        src={logo}
-                        alt="Logo da Empresa"
-                        width="80"
-                        height="80"
-                        className="d-inline-block align-top"
-                        style={{ padding: 10 }}
-                    />
-                    {'Alameda 053'}
-                </Navbar.Brand>
-                <div className="d-flex flex-fil menu-header">
-                    <Nav variant="pills" activeKey={paginaAtual}>
-                        {/* <Nav.Item>
-                            <Nav.Link className="nav-link-custom" eventKey="inicio" onClick={() => trocarPagina('inicio')}>Inicio</Nav.Link>
-                        </Nav.Item> */}
-                        <Nav.Item>
-                            <Nav.Link className="nav-link-custom" eventKey="produtos" onClick={() => trocarPagina('produtos')}>Produtos</Nav.Link>
-                        </Nav.Item>
-                        {/* <Nav.Item>
-                            <Nav.Link className="nav-link-custom" eventKey="compras" onClick={() => trocarPagina('compras')}> Compras</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link className="nav-link-custom" eventKey="comandas" onClick={() => trocarPagina('comandas')}>Comandas</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link className="nav-link-custom" eventKey="relatorio" onClick={() => trocarPagina('relatorio')}>Relatorio</Nav.Link>
-                        </Nav.Item> */}
-                    </Nav>
-                </div>
-                <Button style={{ marginLeft: 135 }} variant="primary">Login</Button>
-            </Container>
-        </Navbar>
+        <div className='header'>
+            <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
+                <Container>
+                    {/* Logo à esquerda */}
+                    <Navbar.Brand href="#">
+                        <img
+                            src={logo}
+                            alt="Logo"
+                            height="75"
+                            className="d-inline-block align-top"
+                        />
+                    </Navbar.Brand>
+
+                    {/* Botão do menu hamburguer */}
+                    <Button
+                        variant="outline-light"
+                        onClick={toggleOffCanvas}
+                        className="d-lg-none"
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </Button>
+
+                    {/* Menu no centro (mostrado em telas grandes) */}
+                    <Navbar.Collapse
+                        id="basic-navbar-nav"
+                        className={`${showOffCanvas ? '' : 'justify-content-center'
+                            } d-lg-flex`}
+                    >
+                        <Nav className="mx-auto">
+                            <Nav.Link href="#" className="nav-link-hover">
+                                Início
+                            </Nav.Link>
+                            <Nav.Link href="produtos" className="nav-link-hover">
+                                Produtos
+                            </Nav.Link>
+                            <Nav.Link href="#" className="nav-link-hover">
+                                Categorias
+                            </Nav.Link>
+                            <Nav.Link href="#" className="nav-link-hover">
+                                Compra
+                            </Nav.Link>
+                            <Nav.Link href="#" className="nav-link-hover">
+                                Comandas
+                            </Nav.Link>
+                            <Nav.Link href="#" className="nav-link-hover">
+                                Relatório
+                            </Nav.Link>
+                        </Nav>
+                        <Nav>
+                            <Nav.Link href="#" className="ml-auto nav-link-hover">
+                                Login
+                            </Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+
+            {/* Menu off-canvas (mostrado em telas pequenas) */}
+            <div
+                className={`off-canvas ${showOffCanvas ? 'show' : ''}`}
+            >
+                <Nav className="flex-column" style={{ width: '145px' }}>
+                    <Nav.Link href="#" className="nav-link-hover">
+                        Início
+                    </Nav.Link>
+                    <Nav.Link href="#" className="nav-link-hover">
+                        Produtos
+                    </Nav.Link>
+                    <Nav.Link href="#" className="nav-link-hover">
+                        Categorias
+                    </Nav.Link>
+                    <Nav.Link href="#" className="nav-link-hover">
+                        Compra
+                    </Nav.Link>
+                    <Nav.Link href="#" className="nav-link-hover">
+                        Comandas
+                    </Nav.Link>
+                    <Nav.Link href="#" className="nav-link-hover">
+                        Relatório
+                    </Nav.Link>
+                    <Nav.Link href="#" className="ml-auto">
+                        Login
+                    </Nav.Link>
+                </Nav>
+            </div>
+        </div>
     );
-}
+};
 
 export default Header;

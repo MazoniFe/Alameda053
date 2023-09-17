@@ -2,16 +2,62 @@ img {
     border-radius: 50%;
 }
 
-.nav-link-custom {
-    color: #333; /* Cor padrão */
-  }
-  
-  .nav-link-custom.active {
-    color: #ff0; /* Cor amarela para o item ativo (clicado) */
-  }
-
-.logo{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+.off-canvas .nav-link {
+  color: #414141; /* Cor do texto */
+  transition: color 0.3s; /* Animação de transição da cor do texto */
 }
+
+.off-canvas .nav-link:hover {
+  color: #aca24c !important; /* Cor do texto no hover */
+}
+
+/* Estilos para o menu off-canvas */
+.off-canvas {
+  position: fixed;
+  top: 40px;
+  right: -300px; /* Esconde o menu à direita da tela */
+  height: 100%;
+  background-color: #252525;
+  padding: 20px;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.off-canvas.show {
+  right: 0; /* Exibe o menu à direita da tela */
+}
+
+.nav-link-hover:hover {
+  color: #bbb939 !important;
+}
+/* Estilos para links no hover */
+.nav-link {
+  color: #333; /* Cor do texto padrão */
+  text-decoration: none; /* Remova a decoração de texto */
+  position: relative; /* Para posicionar o elemento filho (a camada) */
+}
+
+
+/* Estilo para a linha no hover */
+.nav-link::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px; /* Espessura da linha */
+  bottom: 0; /* Posição vertical da linha (no meio do texto) */
+  left: 50%; /* Posição horizontal da linha (no meio do texto) */
+  background-color: #f7f331; /* Cor da linha no hover */
+  transform: translateX(-50%); /* Ajuste a posição para o centro */
+  transition: width 0.3s; /* Animação da largura da linha */
+}
+
+/* Efeito no hover */
+.nav-link:hover::before {
+  width: 100%; /* Largura da linha no hover */
+}
+
+
+
+
+
+

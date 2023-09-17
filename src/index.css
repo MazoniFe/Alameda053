@@ -12,13 +12,25 @@ code {
     monospace;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1200) {
   html {
     font-size: 93.75% !important;
   }
+
+  h4{
+    font-size: 18px !important;
+  }
+  
+  .cardImg{
+    max-height: 100px !important;
+  }
+
+  .container-buttons-card{
+    flex-wrap: wrap-reverse !important;
+  }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   html {
     font-size: 87.5% !important;
     
@@ -27,8 +39,26 @@ code {
     display: none !important;
   }
 
+  .off-canvas{
+    width: 110px;
+    font-size: 85%;
+  }
+
+  .categoriaBtn{
+    font-size: 83% !important;
+  }
+
   .preview {
     background-color: red;
     display: none !important;
+  }
+
+  .categoriaForm {
+    flex-direction: row !important; 
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .form-check {
+    margin-right: 10px;
   }
 }

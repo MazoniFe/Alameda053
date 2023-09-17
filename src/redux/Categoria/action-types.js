@@ -1,5 +1,5 @@
-const janelaCriarProdutoActionTypes = {
+const janelaCategoriasAtualizar = {
     ATUALIZAR: 'categoria/atualizar'
 }
 
-export default janelaCriarProdutoActionTypes;
+export default janelaCategoriasAtualizar;

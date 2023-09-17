@@ -1,7 +1,6 @@
 const janelaCriarCategoriaActionTypes = {
     MOSTRAR: 'janelaCriarCategoria/mostrar',
-    ESCONDER: 'janelaCriarCategoria/naoMostrar',
-    EDITAR: 'janelaCriarCategoria/editar'
+    ESCONDER: 'janelaCriarCategoria/naoMostrar'
 }
 
 export default janelaCriarCategoriaActionTypes;

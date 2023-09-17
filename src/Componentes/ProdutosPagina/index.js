@@ -49,7 +49,7 @@ const ProdutosPagina = () => {
             .finally(e => {
                 setLoading(false);
             });
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         handleBuscarProdutos();

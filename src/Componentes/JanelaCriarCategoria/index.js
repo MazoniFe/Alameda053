@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Form, Button, Container, Row, Col, Card, ListGroup, Spinner } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Spinner } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
-import { useDispatch, useSelector } from 'react-redux';
-import JanelaCriarProdutoActionTypes from '../../redux/JanelaCriarProduto/action-types';
+import { useDispatch} from 'react-redux';
 import { buscarCategorias, cadastrarCategoria } from '../../API';
 import CategoriasActionType from '../../redux/Categoria/action-types';
 import janelaCriarCategoriaActionTypes from '../../redux/JanelaCriarCategoria/action-types';
@@ -13,7 +12,6 @@ const ModalCriarEditar = () => {
         nome: ''
     });
     const dispatch = useDispatch();
-    const { tipo, produtoId } = useSelector(rootReducer => rootReducer.janelaCriarProdutoReducer);
     const [loading, setLoading] = useState(true);
 
     const handleChange = (e) => {
@@ -23,10 +21,6 @@ const ModalCriarEditar = () => {
             return updatedProduto;
         });
     };
-
-    useEffect(() => {
-        handleBuscarCategorias();
-    },[]);
 
     const handleBuscarCategorias = useCallback(() => {
         buscarCategorias() // Passe searchTerm para buscar produtos com base no termo
@@ -43,6 +37,10 @@ const ModalCriarEditar = () => {
 
             });
     }, [dispatch]);
+
+    useEffect(() => {
+        handleBuscarCategorias();
+    },[handleBuscarCategorias]);
 
     const fecharJanela = () => {
         dispatch({ type: janelaCriarCategoriaActionTypes.ESCONDER });

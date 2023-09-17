@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Form, Button, Container, Row, Col, Card, ListGroup, Spinner } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 
-import { FaTimes } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import JanelaCriarProdutoActionTypes from '../../redux/JanelaCriarProduto/action-types';
 import { buscarProdutos, buscarProduto, cadastrarProduto, alterarProduto } from '../../API';

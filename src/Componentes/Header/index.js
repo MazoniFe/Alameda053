@@ -40,22 +40,19 @@ const Header = () => {
                             } d-lg-flex`}
                     >
                         <Nav className="mx-auto">
-                            <Nav.Link href="#" className="nav-link-hover">
+                            <Nav.Link href="inicio" className="nav-link-hover">
                                 Início
                             </Nav.Link>
                             <Nav.Link href="produtos" className="nav-link-hover">
                                 Produtos
                             </Nav.Link>
-                            <Nav.Link href="#" className="nav-link-hover">
-                                Categorias
-                            </Nav.Link>
-                            <Nav.Link href="#" className="nav-link-hover">
+                            <Nav.Link href="compra" className="nav-link-hover">
                                 Compra
                             </Nav.Link>
-                            <Nav.Link href="#" className="nav-link-hover">
+                            <Nav.Link href="comandas" className="nav-link-hover">
                                 Comandas
                             </Nav.Link>
-                            <Nav.Link href="#" className="nav-link-hover">
+                            <Nav.Link href="relatorio" className="nav-link-hover">
                                 Relatório
                             </Nav.Link>
                         </Nav>
@@ -73,25 +70,22 @@ const Header = () => {
                 className={`off-canvas ${showOffCanvas ? 'show' : ''}`}
             >
                 <Nav className="flex-column" style={{ width: '145px' }}>
-                    <Nav.Link href="#" className="nav-link-hover">
+                    <Nav.Link href="inicio" className="nav-link-hover">
                         Início
                     </Nav.Link>
-                    <Nav.Link href="#" className="nav-link-hover">
+                    <Nav.Link href="produtos" className="nav-link-hover">
                         Produtos
                     </Nav.Link>
-                    <Nav.Link href="#" className="nav-link-hover">
-                        Categorias
-                    </Nav.Link>
-                    <Nav.Link href="#" className="nav-link-hover">
+                    <Nav.Link href="compra" className="nav-link-hover">
                         Compra
                     </Nav.Link>
-                    <Nav.Link href="#" className="nav-link-hover">
+                    <Nav.Link href="comandas" className="nav-link-hover">
                         Comandas
                     </Nav.Link>
-                    <Nav.Link href="#" className="nav-link-hover">
+                    <Nav.Link href="relatorio" className="nav-link-hover">
                         Relatório
                     </Nav.Link>
-                    <Nav.Link href="#" className="ml-auto">
+                    <Nav.Link href="login" className="ml-auto">
                         Login
                     </Nav.Link>
                 </Nav>

@@ -21,7 +21,7 @@ function Header() {
     }
 
     return (
-        <Navbar bg="light" variant="light">
+        <Navbar className='header' bg="light" variant="light">
             <Container>
                 <Navbar.Brand className="d-flex align-items-center">
                     <img
@@ -34,15 +34,15 @@ function Header() {
                     />
                     {'Alameda 053'}
                 </Navbar.Brand>
-                <div className="d-flex flex-fil">
+                <div className="d-flex flex-fil menu-header">
                     <Nav variant="pills" activeKey={paginaAtual}>
-                        <Nav.Item>
+                        {/* <Nav.Item>
                             <Nav.Link className="nav-link-custom" eventKey="inicio" onClick={() => trocarPagina('inicio')}>Inicio</Nav.Link>
-                        </Nav.Item>
+                        </Nav.Item> */}
                         <Nav.Item>
                             <Nav.Link className="nav-link-custom" eventKey="produtos" onClick={() => trocarPagina('produtos')}>Produtos</Nav.Link>
                         </Nav.Item>
-                        <Nav.Item>
+                        {/* <Nav.Item>
                             <Nav.Link className="nav-link-custom" eventKey="compras" onClick={() => trocarPagina('compras')}> Compras</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
@@ -50,7 +50,7 @@ function Header() {
                         </Nav.Item>
                         <Nav.Item>
                             <Nav.Link className="nav-link-custom" eventKey="relatorio" onClick={() => trocarPagina('relatorio')}>Relatorio</Nav.Link>
-                        </Nav.Item>
+                        </Nav.Item> */}
                     </Nav>
                 </div>
                 <Button style={{ marginLeft: 135 }} variant="primary">Login</Button>

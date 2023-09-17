@@ -1,0 +1,17 @@
+img {
+    border-radius: 50%;
+}
+
+.nav-link-custom {
+    color: #333; /* Cor padrão */
+  }
+  
+  .nav-link-custom.active {
+    color: #ff0; /* Cor amarela para o item ativo (clicado) */
+  }
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

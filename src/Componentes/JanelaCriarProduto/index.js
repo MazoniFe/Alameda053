@@ -207,7 +207,7 @@ const ModalCriarEditar = () => {
 
                         <Col className="preview">
                             <h4>Preview</h4>
-                            <Card>
+                            <Card style={{maxWidth: '200px'}}>
                                 <Card.Img
                                     variant="top"
                                     style={{ maxHeight: '150px', aspectRatio: '1/1' }}

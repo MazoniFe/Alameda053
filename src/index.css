@@ -20,13 +20,13 @@ code {
   h4{
     font-size: 18px !important;
   }
-  
-  .cardImg{
-    max-height: 100px !important;
-  }
 
   .container-buttons-card{
     flex-wrap: wrap-reverse !important;
+  }
+
+  .cardImg{
+    max-height: 100px !important;
   }
 }
 

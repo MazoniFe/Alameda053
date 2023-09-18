@@ -3,6 +3,7 @@ import janelaCriarProdutoReducer from './JanelaCriarProduto/reducer.js';
 import janelaCriarCategoriasReducer from './JanelaCriarCategoria/reducer.js';
 import categoriasReducer from './Categoria/reducer.js';
 import produtosReducer from './Produto/reducer.js';
+import modalConfirmarReducer from './ModalConfirmar/reducer.js';
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
@@ -10,7 +11,8 @@ const rootReducer = combineReducers({
     janelaCriarProdutoReducer,
     categoriasReducer,
     produtosReducer,
-    janelaCriarCategoriasReducer
+    janelaCriarCategoriasReducer,
+    modalConfirmarReducer
 });
 
 

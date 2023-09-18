@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { buscarProdutos, removerProduto, buscarCategorias } from '../../API';
+import { buscarProdutos, buscarCategorias } from '../../API';
 import { Card, Container, Row, Col, ListGroup, InputGroup, Form } from 'react-bootstrap';
 import { BsSearch } from 'react-icons/bs';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import {FiDelete} from 'react-icons/fi';
+import { FiDelete } from 'react-icons/fi';
 import JanelaCriarProdutoActionType from '../../redux/JanelaCriarProduto/action-types';
 import JanelaCriarCategoriaActionType from '../../redux/JanelaCriarCategoria/action-types';
+import ModalConfirmarActionType from '../../redux/ModalConfirmar/action-types';
 import ProdutosActionTypes from '../../redux/Produto/action-types';
 import CategoriasActionTypes from '../../redux/Categoria/action-types';
 import './produtosPagina.css';
@@ -18,7 +19,7 @@ const ProdutosPagina = () => {
     const [categoriaFiltro, setCategoriaFiltro] = useState('');
     const [loading, setLoading] = useState(true);
     const { produtos } = useSelector(rootReducer => rootReducer.produtosReducer);
-    const {categorias} = useSelector(rootReducer => rootReducer.categoriasReducer)
+    const { categorias } = useSelector(rootReducer => rootReducer.categoriasReducer)
 
     const dispatch = useDispatch();
 
@@ -41,7 +42,7 @@ const ProdutosPagina = () => {
     const handleBuscarCategorias = useCallback(() => {
         buscarCategorias()
             .then((data) => {
-                dispatch({type: CategoriasActionTypes.ATUALIZAR, categorias: data});
+                dispatch({ type: CategoriasActionTypes.ATUALIZAR, categorias: data });
             })
             .catch((e) => {
                 console.error(e);
@@ -70,15 +71,16 @@ const ProdutosPagina = () => {
         }
     }
 
-    const handleRemoveButton = (id) => {
-        removerProduto(id)
-            .then(data => {
-                handleBuscarProdutos();
-            }).catch(e => {
+    const handleRemoveButton = (id, nome) => {
+        dispatch({type:ModalConfirmarActionType.MOSTRAR, tipo:'adicionar', id: id, nome:nome});
+        // removerProduto(id)
+        //     .then(data => {
+        //         handleBuscarProdutos();
+        //     }).catch(e => {
 
-            }).finally(e => {
+        //     }).finally(e => {
 
-            })
+        //     })
     }
 
     const handleAdicionarProduto = (type) => {
@@ -91,6 +93,10 @@ const ProdutosPagina = () => {
 
     const handleEditarProduto = (id) => {
         dispatch({ type: JanelaCriarProdutoActionType.EDITAR, produtoId: id });
+    }
+
+    const handleRemoverCategoria = (id, nome) => {
+        dispatch({ type: ModalConfirmarActionType.MOSTRAR, id: id, nome: nome, tipo: 'categoria' });
     }
 
     const produtosFiltrados = produtos.filter((produto) =>
@@ -135,25 +141,29 @@ const ProdutosPagina = () => {
                                 <h5>Categorias</h5>
                                 <BsPlusCircleFill size={22} style={{ marginRight: '0.6em', color: 'rgb(255, 165, 0)' }} onClick={handleAdicionarCategoria}></BsPlusCircleFill>
                             </div>
-                            <form className='categoriaForm mt-3' style={{display: 'flex', flexDirection: 'column' }}>
+                            <form className='categoriaForm mt-3' style={{ display: 'flex', flexDirection: 'column' }}>
                                 {categorias.map((categoria) => (
-                                    <div className='d-flex align-items-center justify-content-between'>
-                                    <Form.Check
-                                        key={categoria.id}
-                                        className='form-check'
-                                        inline
-                                        label={categoria.nome}
-                                        name="group1"
-                                        type={'checkbox'}
-                                        id={`inline-checkbox-${categoria.id}`}
-                                        checked={categoriaFiltro === categoria.nome}
-                                        onChange={() => selecionarCategoria(categoria.nome)}
-                                        style={{
-                                            fontSize: '1em', // Aumenta o tamanho da fonte
-                                            marginTop: '5px', // Aumenta o espaço ao redor do checkbox
-                                        }}
-                                    />
-                                    <FiDelete style={{color:'rgb(232, 55, 55)', marginRight:'0.6em'}}> </FiDelete>
+                                    <div className='d-flex align-items-center justify-content-between' key={categoria.id}>
+                                        <Form.Check
+                                            className='form-check'
+                                            inline
+                                            label={categoria.nome}
+                                            name="group1"
+                                            type={'checkbox'}
+                                            id={`inline-checkbox-${categoria.id}`}
+                                            checked={categoriaFiltro === categoria.nome}
+                                            onChange={() => selecionarCategoria(categoria.nome)}
+                                            style={{
+                                                fontSize: '1em',
+                                                marginTop: '5px',
+                                            }}
+                                        />
+                                        {categoria.id !== 1 && (
+                                            <FiDelete
+                                                onClick={() => handleRemoverCategoria(categoria.id, categoria.nome)}
+                                                style={{ color: 'rgb(232, 55, 55)', marginRight: '0.6em' }}
+                                            />
+                                        )}
                                     </div>
 
                                 ))}
@@ -178,7 +188,7 @@ const ProdutosPagina = () => {
                                                         </ListGroup>
                                                         <div className="container-buttons-card flex-wrap d-flex justify-content-between">
                                                             <Button variant="warning" className="mx-2 my-2 flex-fill btn-sm" onClick={() => handleEditarProduto(produto.id)}>Editar</Button>
-                                                            <Button variant="danger" className="mx-2 my-2 flex-fill btn-sm" onClick={() => handleRemoveButton(produto.id)}>Remover</Button>
+                                                            <Button variant="danger" className="mx-2 my-2 flex-fill btn-sm" onClick={() => handleRemoveButton(produto.id, produto.nome)}>Remover</Button>
                                                         </div>
                                                     </Card>
                                                 </Col>

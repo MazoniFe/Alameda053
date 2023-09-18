@@ -17,6 +17,7 @@ const ModalCriarEditar = () => {
     });
     const dispatch = useDispatch();
     const { tipo, produtoId } = useSelector(rootReducer => rootReducer.janelaCriarProdutoReducer);
+    const {categorias} = useSelector(rootReducer => rootReducer.categoriasReducer);
     const [loading, setLoading] = useState(true);
 
     const handleChange = (e) => {
@@ -50,7 +51,7 @@ const ModalCriarEditar = () => {
                     setLoading(false);
                 });
         }
-    }, [produtoId]) 
+    }, [produtoId])
 
     useEffect(() => {
         if (tipo === 'editar') {
@@ -105,6 +106,7 @@ const ModalCriarEditar = () => {
         alterarProduto({ ...produto, produtoId })
             .then(data => {
                 fecharJanela();
+                handleBuscarProdutos();
             })
             .catch(e => {
                 console.log(e);
@@ -163,13 +165,18 @@ const ModalCriarEditar = () => {
 
                                         <Form.Group controlId="categoria">
                                             <Form.Label>Categoria</Form.Label>
-                                            <Form.Control
-                                                type="text"
+                                            <Form.Select
                                                 name="categoria"
                                                 value={produto.categoria}
                                                 onChange={handleChange}
                                                 required
-                                            />
+                                            >
+                                                {categorias.map(e => (
+                                                    <option key={e.id} value={e.nome}>
+                                                        {e.nome}
+                                                    </option>
+                                                ))}
+                                            </Form.Select>
                                         </Form.Group>
 
                                         <Form.Group controlId="preco">
@@ -205,9 +212,9 @@ const ModalCriarEditar = () => {
                                     variant="top"
                                     style={{ maxHeight: '150px', aspectRatio: '1/1' }}
                                     src={produto.img_link}
-                                    onLoad={() => setImagemCarregada(produto.img_link)} 
+                                    onLoad={() => setImagemCarregada(produto.img_link)}
                                     onError={e => { e.target.src = 'https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg' }}
-                                    />
+                                />
                                 <Card.Body>
                                     <Card.Title className='text-truncate'>{produto.nome}</Card.Title>
                                     <Card.Text className='text-truncate'>{produto.descricao}</Card.Text>

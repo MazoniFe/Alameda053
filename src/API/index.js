@@ -56,6 +56,24 @@ const removerProduto = (id) => {
   });
 };
 
+const removerCategoria = (id) => {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: `${baseURL}/categorias/${id}`,
+      type: 'DELETE',
+      dataType: 'json',
+      success: function (data) {
+        const categorias = data.content;
+        resolve(categorias); // Resolve a promessa com os dados da API
+      },
+      error: function (error) {
+        console.error('Erro ao buscar produtos:', error);
+        reject(error); // Rejeita a promessa com o erro
+      },
+    });
+  });
+};
+
 const buscarProduto = (id) => {
   return new Promise((resolve, reject) => {
     $.ajax({
@@ -135,4 +153,4 @@ const alterarProduto = (data) => {
   });
 }
 
-export { buscarCategorias, buscarProdutos, buscarProduto, removerProduto, cadastrarProduto, alterarProduto, cadastrarCategoria };
+export { buscarCategorias, buscarProdutos, buscarProduto, removerProduto, cadastrarProduto, alterarProduto, cadastrarCategoria, removerCategoria };

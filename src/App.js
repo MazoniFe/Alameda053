@@ -9,20 +9,24 @@ import JanelaCriarCategoria from './Componentes/JanelaCriarCategoria';
 import Inicio from './Componentes/Inicio';
 import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import ModalConfirmar from './Componentes/ModalConfirmar';
 
 
 
 function App() {
   const { mostrarCriarProduto } = useSelector(rootReducer => rootReducer.janelaCriarProdutoReducer);
   const { mostrarCriarCategoria } = useSelector(rootReducer => rootReducer.janelaCriarCategoriasReducer);
+  const { mostrarModalConfirmar } = useSelector(rootReducer => rootReducer.modalConfirmarReducer);
   return (
-
     <Router>
       {mostrarCriarProduto && (
         <JanelaCriarProduto></JanelaCriarProduto>
       )}
       {mostrarCriarCategoria && (
         <JanelaCriarCategoria></JanelaCriarCategoria>
+      )}
+      {mostrarModalConfirmar && (
+        <ModalConfirmar></ModalConfirmar>
       )}
       <Header></Header>
       <Container>
